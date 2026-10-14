@@ -1,78 +1,61 @@
-# 🛍️ E-Commerce Sales & Customer Behavior Analysis
+# 🛒 E-Commerce Exploratory Data Analysis (EDA)
 
-[![Python](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
-[![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-orange.svg)](https://pandas.pydata.org/)
-[![Matplotlib & Seaborn](https://img.shields.io/badge/Visualization-Matplotlib%20%7C%20Seaborn-green.svg)](https://seaborn.pydata.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Python](https://img.shields.io/badge/Python-3.x-blue.svg)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Manipulation-orange.svg)
+![Seaborn](https://img.shields.io/badge/Seaborn-Data%20Visualization-green.svg)
 
----
-
-## 📖 Table of Contents
-1. [Project Overview & Objectives](#-project-overview--objectives)
-2. [Dataset Overview](#-dataset-overview)
-3. [Key Steps & Exploratory Data Analysis (EDA)](#-key-steps--exploratory-data-analysis-eda)
-4. [Key Insights & Business Recommendations](#-key-insights--business-recommendations)
-5. [How to Run / Installation Guide](#-how-to-run--installation-guide)
-6. [Project Structure](#-project-structure)
-7. [Author & Acknowledgments](#-author--acknowledgments)
+## 📌 Project Overview
+This project aims to conduct **Exploratory Data Analysis (EDA)** and **Feature Engineering** on an e-commerce dataset using Python. This analysis is designed to understand sales patterns, identify key revenue drivers, and analyze monthly and daily transaction trends to provide data-driven business recommendations.
 
 ---
 
-## 🎯 1. Project Overview & Objectives
-
-Proyek ini bertujuan untuk menganalisis data transaksi penjualan e-commerce guna menggali wawasan strategis (*actionable insights*) terkait perilaku pelanggan dan performa penjualan. 
-
-**Tujuan Utama Analisis:**
-* **Memahami Tren Penjualan:** Mengidentifikasi pola transaksi berdasarkan waktu (hari dan bulan) untuk mengetahui periode puncak (*peak season*) bisnis.
-* **Analisis Pendapatan:** Menghitung total pendapatan (*revenue*) dan distribusi pembelian per transaksi maupun produk.
-* **Korelasi Variabel:** Menganalisis hubungan antara kuantitas produk, harga satuan (*unit price*), dan total nilai transaksi.
-* **Segmentasi Perilaku Pelanggan:** Mengetahui pola pembelian pelanggan berdasarkan ID unik dan wilayah geografis/negara asal transaksi.
+## 🎯 Objectives & Requirements
+- **Data Understanding & Cleaning**: Identify data types, detect missing values, and handle duplicate data.
+- **Feature Engineering**: Create new variables such as date components (`year`, `month`, `day_name`) and `total_price` ($\text{Quantity} \times \text{UnitPrice}$).
+- **Multivariate Analysis**: Analyze correlations between numerical variables using a *Correlation Heatmap*.
+- **Exploratory Data Analysis**: Answer business questions using data manipulation techniques (`groupby`, `aggregation`, `datetime` manipulation) and intuitive data visualizations.
 
 ---
 
-## 📊 2. Dataset Overview
+## 📊 Key Insights & Findings
 
-Dataset yang digunakan berisi catatan transaksi e-commerce dengan total **4.870 baris** dan **8 kolom awal**.
+### 1. Correlation Analysis (Multivariate)
+- **Quantity & Total Price ($r \approx 0.79$)**: Displays a very strong positive correlation. Item volume is the main factor driving the company's total revenue.
+- **UnitPrice & Total Price ($r \approx 0.09$)**: Displays a very weak correlation, indicating that sales are dominated by high-volume standard-margin products rather than expensive items.
 
-### Skema Kolom Dataset
-| Nama Kolom | Tipe Data | Deskripsi / Penjelasan |
-| :--- | :--- | :--- |
-| `InvoiceNo` | Object / String | Nomor unik faktur atau transaksi |
-| `StockCode` | Object / String | Kode unik pengenal barang/produk |
-| `Description` | Object / String | Nama atau deskripsi lengkap produk |
-| `Quantity` | Integer | Jumlah barang yang dibeli per transaksi |
-| `InvoiceDate` | Datetime | Tanggal dan waktu terjadinya transaksi |
-| `UnitPrice` | Float | Harga satuan produk |
-| `CustomerID` | Float / String | ID unik identifikasi pelanggan |
-| `Country` | Object / String | Negara tempat transaksi dilakukan |
+### 2. Monthly Revenue Trend
+- **Low Season**: Sales tend to be stable and stagnant from January to April.
+- **Growth & Peak Season**: Sales begin to rise mid-year and experience exponential growth in Quarter 4, with peak sales (**Peak Season**) occurring in **November and December**.
 
-> **Catatan Kebersihan Data (*Data Cleanliness*):** Dataset berada dalam kondisi yang sangat bersih dengan **0 nilai kosong (*missing values*)** dan **0 data duplikat**, sehingga siap untuk langsung diolah ke tahap *feature engineering*.
+### 3. Daily Transaction Pattern
+- Transactions are most active on **weekdays**, with the highest peak in unique transactions recorded on **Thursday**.
 
 ---
 
-## 🔍 3. Key Steps & Exploratory Data Analysis (EDA)
-
-Proses pengolahan data melalui beberapa tahapan utama:
-1. **Data Cleaning & Understanding:** Memuat dataset, memvalidasi tipe data, serta memastikan tidak ada anomali atau data duplikat.
-2. **Feature Engineering:** 
-   * Konversi kolom `InvoiceDate` menjadi format *datetime* terstruktur, serta mengekstrak informasi tambahan berupa `year`, `month`, dan `day_name`.
-   * Pembuatan kolom baru `total_price` yang dihitung dari perkalian `Quantity` $\times$ `UnitPrice`.
-3. **Multivariate Analysis & Correlation:** Menganalisis korelasi antar variabel numerik (seperti hubungan antara harga satuan, jumlah barang yang dibeli, dan total pendapatan) menggunakan matriks korelasi dan visualisasi *seaborn heatmap*.
+## 💡 Business Recommendations
+1. **Inventory & Logistics Management**: Ahead of Q4, top-selling inventory and shipping capacity should be prepared starting in September to prevent stockouts during the year-end surge.
+2. **Promotional Strategy**: Create targeted marketing campaigns or loyalty programs during the low season (January–April) to maintain steady revenue flow.
 
 ---
 
-## 💡 4. Key Insights & Business Recommendations
+## 🛠️ Tools & Libraries Used
+- **Environment**: Google Colaboratory / Jupyter Notebook
+- **Language**: Python 3.x
+- **Libraries**:
+  - `pandas` - Data Manipulation & Aggregation
+  - `numpy` - Numerical Computations
+  - `matplotlib` & `seaborn` - Data Visualization
 
-### 🔑 Temuan Penting (*Key Insights*):
-* **Pola Waktu Transaksi:** Terdapat hari-hari tertentu dalam seminggu yang menunjukkan lonjakan volume transaksi signifikan, mencerminkan kebiasaan belanja mingguan pelanggan.
-* **Distribusi Pendapatan:** Sebagian besar transaksi didominasi oleh pembelian kuantitas menengah dengan variasi harga produk yang kompetitif.
-* **Korelasi Harga & Kuantitas:** Analisis menunjukkan bagaimana penyesuaian harga satuan berdampak langsung terhadap total nilai penjualan per transaksi.
+---
 
-### 📈 Rekomendasi Strategis (*Business Recommendations*):
-* **Optimasi Stok & Promosi Berjadwal:** Jalankan kampanye diskon atau *flash sale* khusus pada hari-hari yang terbukti memiliki volume transaksi paling tinggi untuk memaksimalkan *revenue*.
-* **Personalisasi Pelanggan:** Manfaatkan data `CustomerID` untuk membuat program loyalitas (*loyalty program*) bagi pelanggan dengan frekuensi belanja tertinggi.
-* **Strategi Bundling Produk:** Tawarkan *bundling* produk untuk barang-barang yang sering dibeli bersamaan guna meningkatkan rata-rata nilai transaksi (*average order value*).
-
+## 📂 Repository Structure
+```text
+├── dataset/
+│   └── ecommerce.csv       # Raw Dataset
+├── notebook/
+│   └── EDA_Ecommerce.ipynb # Google Colab Notebook
+└── README.md               # Project Documentation
+```
 ---
 
 ## 🚀 Cara Menjalankan
@@ -86,21 +69,3 @@ Anda dapat menjalankan kode ini dengan dua cara:
 *    Pastikan Anda telah menginstal Python.
 *    Instal Jupyter Notebook dengan perintah: pip install notebook.
 *    Buka terminal, arahkan ke direktori file, dan jalankan perintah: jupyter notebook.
-
-## 📁 6. Project Structure
-Struktur direktori repository ini disusun sebagai berikut:
-```bash
-ecommerce-sales-analysis/
-│
-├── data/
-│   └── ecommerce.csv            # Dataset utama e-commerce
-│
-├── notebooks/
-│   └── e_commerce_analysis.ipynb # Jupyter Notebook berisi proses EDA & pemodelan
-│
-├── outputs/
-│   └── figures/                 # Hasil visualisasi grafik (PNG/JPG)
-│
-├── README.md                    # Dokumentasi proyek
-└── requirements.txt             # Daftar pustaka / dependencies Python
-```
